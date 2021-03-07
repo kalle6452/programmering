@@ -1,23 +1,26 @@
 using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 
 
 class Program
 {
     static void Main(string[] args)
     {
-        int antalnummer = 13;//Antalet tal som ska sorteras
-        Console.WriteLine("Oserterad lista "); 
+        Stopwatch bubbelstoppur = new Stopwatch();
+        Stopwatch insertionstoppur = new Stopwatch();
+        int antalnummer = 100000;//Antalet tal som ska sorteras
+        Console.WriteLine("Antal element: {0} ", antalnummer); 
         Random rnd = new Random(); 
         List<int> tallista = new List<int>(); // Här skapas en lista med slumptal.
         for (int i = 0; i < antalnummer; i++)//
         {
             tallista.Add(rnd.Next(10));
-            Console.WriteLine(tallista[i]);
+           // Console.WriteLine(tallista[i]);
         }
 
-     //Här sorteras listan med bubblesort.
+        //Här sorteras listan med bubblesort.
+        bubbelstoppur.Start();
         for (int i = 1; i < antalnummer; i++)
         {
             for (int j = 0; j < (antalnummer - i); j++)
@@ -31,22 +34,25 @@ class Program
                 
             }
         }
-        Console.WriteLine("Sorterad med bubblesort i stigande ordning ");
+        bubbelstoppur.Stop();
+       
+      /*  Console.WriteLine("Sorterad med bubblesort i stigande ordning ");
         for (int k = 0; k < antalnummer; k++)
         {
             Console.WriteLine(tallista[k]);
-        }
+        }*/
         Random slump = new Random();
-        Console.WriteLine("Ny lista med slumptal ");
+      //  Console.WriteLine("Ny lista med slumptal ");
         int[] tallista2 = new int[antalnummer];//Skapat en tom array av heltal 
         for (int i = 0; i < antalnummer; i++)
         {
             tallista2[i] = slump.Next(10);
-            Console.WriteLine(tallista2[i]);
+           // Console.WriteLine(tallista2[i]);
         }
         
         int tmp, minst;
-        for (int y = 0; y < antalnummer; y++)
+        insertionstoppur.Start();
+        for (int y = 0; y < antalnummer; y++)// Här börjar den sortera med insertionsort
         {
             minst = y;
             for (int m = y + 1; m < antalnummer; m++)
@@ -60,11 +66,14 @@ class Program
             tallista2[minst] = tallista2[y];
             tallista2[y] = tmp;
         }
-        Console.WriteLine("Sorterad lista med selection sort ");
+        insertionstoppur.Stop();
+      /*  Console.WriteLine("Sorterad lista med selection sort ");
         for (int y = 0; y < antalnummer; y++) 
         {
             Console.WriteLine(tallista2[y] + " ");
-        }
+        }*/
+        Console.WriteLine("Tid för bubbelsortering: {0} ", bubbelstoppur.Elapsed);
+        Console.WriteLine("Tid för insertionsortering: {0} ", insertionstoppur.Elapsed);
     }
 
 }
@@ -73,3 +82,4 @@ class Program
 //Testar att använda array istället för list
 /*Loop runt allt int [] försökserie = new int[3]{10, 1000, 100000};
  * for (int försöknr = 0 försöksnr 
+*/
