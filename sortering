@@ -1,76 +1,75 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace BubbleSort
+
+
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void BubbleSort(int[] list)
+        int antalnummer = 13;//Antalet tal som ska sorteras
+        Console.WriteLine("Oserterad lista "); 
+        Random rnd = new Random(); 
+        List<int> tallista = new List<int>(); // Här skapas en lista med slumptal.
+        for (int i = 0; i < antalnummer; i++)//
         {
-            bool needsSorting = true;
-            //Gör en loop för varje tal som skall sorteras, avbryt om talen är sorterade
-            for (int i = 0; i < list.Length - 1 && needsSorting; i++)
-            {
-                //Signalera att vi börjar om en ny vända med sortering
-                needsSorting = false;
-                //Gå igenom alla tal fram till och med de tal som ev. 
-                //redan är sorterade (variabeln i)
-                for (int j = 0; j < list.Length - 1 - i; j++)
-                {
-                    //Flytta större tal fram i vektorn
-                    if (list[j] > list[j + 1])
-                    {
-                        //Signalera att vi kommer att behöva fortsätta sortera
-                        needsSorting = true;
-                        //Byt plats på tal
-                        int temp = list[j + 1];
-                        list[j + 1] = list[j];
-                        list[j] = temp;
-                    }
-                }
-                //Har vi nu inte behövt sortera några tal så är 
-                //needsSorting == false och loop'en kommer att avbrytas
-            }
+            tallista.Add(rnd.Next(10));
+            Console.WriteLine(tallista[i]);
         }
 
-     
-
-        static void Main(string[] args)
+     //Här sorteras listan med bubblesort.
+        for (int i = 1; i < antalnummer; i++)
         {
-            Random rnd = new Random();
-            List<int> tallista = new List<int>();
-            for (int i = 0; 1 < 1000; i++)
+            for (int j = 0; j < (antalnummer - i); j++)
             {
-                tallista.Add(rnd.Next(10));
-                Console.WriteLine(tallista);
+                if (tallista[j] > tallista[j + 1])
+                {
+                    int temp = tallista[j];
+                    tallista[j] = tallista[j + 1];
+                    tallista[j + 1] = temp;
+                }
+                
             }
-            Console.Write(4);
+        }
+        Console.WriteLine("Sorterad med bubblesort i stigande ordning ");
+        for (int k = 0; k < antalnummer; k++)
+        {
+            Console.WriteLine(tallista[k]);
+        }
+        Random slump = new Random();
+        Console.WriteLine("Ny lista med slumptal ");
+        int[] tallista2 = new int[antalnummer];//Skapat en tom array av heltal 
+        for (int i = 0; i < antalnummer; i++)
+        {
+            tallista2[i] = slump.Next(10);
+            Console.WriteLine(tallista2[i]);
+        }
+        
+        int tmp, minst;
+        for (int y = 0; y < antalnummer; y++)
+        {
+            minst = y;
+            for (int m = y + 1; m < antalnummer; m++)
+            {
+                if (tallista2[m] < tallista2[minst])
+                {
+                    minst = m;
+                }
+            }
+            tmp = tallista2[minst];
+            tallista2[minst] = tallista2[y];
+            tallista2[y] = tmp;
+        }
+        Console.WriteLine("Sorterad lista med selection sort ");
+        for (int y = 0; y < antalnummer; y++) 
+        {
+            Console.WriteLine(tallista2[y] + " ");
         }
     }
+
 }
-/*Console.WriteLine("Skapar slumpad data av längd " + sizes[i]);
-          int[] data = GenerateData(sizes[i]);
 
-          Console.WriteLine("Sorterar slumpad data");
-          DateTime startTid = DateTime.Now;
-          BubbleSort(data);
-          TimeSpan deltaTid = DateTime.Now - startTid;
-          Console.WriteLine("Det tog {0:0.00} ms att sortera.\n", deltaTid.TotalMilliseconds);
-
-          Console.WriteLine("Sorterar redan sorterad data");
-          startTid = DateTime.Now;
-          BubbleSort(data);
-          deltaTid = DateTime.Now - startTid;
-          Console.WriteLine("Det tog {0:0.00} ms att sortera.\n", deltaTid.TotalMilliseconds);*/
-/* static int[] GenerateData(int size)
-      {
-          Random rnd = new Random();
-          int[] data = new int[size];
-
-          for (int i = 0; i < data.Length; i++)
-              data[i] = rnd.Next(data.Length);
-
-          return data;
-   
+//Selectionsort ineffektiv för större mängder data http://cforbeginners.com/CSharp/SelectionSort.html
+//Testar att använda array istället för list
+/*Loop runt allt int [] försökserie = new int[3]{10, 1000, 100000};
+ * for (int försöknr = 0 försöksnr 
