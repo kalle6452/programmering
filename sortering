@@ -7,20 +7,17 @@ class Program
 {
     static void Main(string[] args)
     {
-        Stopwatch bubbelstoppur = new Stopwatch();
-        Stopwatch insertionstoppur = new Stopwatch();
-        int antalnummer = 100000;//Antalet tal som ska sorteras
-        Console.WriteLine("Antal element: {0} ", antalnummer); 
-        Random rnd = new Random(); 
+        Stopwatch bubbelstoppur = new Stopwatch();// Skapar ett tidtagarur som ska tiden på hur lång tid det för talen att sorteras för bubblesort.
+        Stopwatch insertionstoppur = new Stopwatch();// Skapar ett tidtagarur för insertionsort.
+        int antalnummer = 1000;// Antalet tal som ska sorteras, ändrar värdet beroende på hur många tal man som ska sorteras.
+        Console.WriteLine("Antal element: {0} ", antalnummer);// Skriver ut antalet element som sorteras.
+        Random rnd = new Random();//Skapar en random som slumpar tal.
         List<int> tallista = new List<int>(); // Här skapas en lista med slumptal.
-        for (int i = 0; i < antalnummer; i++)//
+        for (int i = 0; i < antalnummer; i++)// En for loop som gör att det läggs till tal tills talen är lika många som antalnummer.
         {
-            tallista.Add(rnd.Next(10));
-           // Console.WriteLine(tallista[i]);
+            tallista.Add(rnd.Next(10));// Här läggs talen till och att det står (10) betyder att de enskilda talen som datorn sorterar är mindre än 10.
         }
-
-        //Här sorteras listan med bubblesort.
-        bubbelstoppur.Start();
+        bubbelstoppur.Start();// Startar tidtagaruret.
         for (int i = 1; i < antalnummer; i++)
         {
             for (int j = 0; j < (antalnummer - i); j++)
@@ -31,28 +28,18 @@ class Program
                     tallista[j] = tallista[j + 1];
                     tallista[j + 1] = temp;
                 }
-                
             }
         }
-        bubbelstoppur.Stop();
-       
-      /*  Console.WriteLine("Sorterad med bubblesort i stigande ordning ");
-        for (int k = 0; k < antalnummer; k++)
-        {
-            Console.WriteLine(tallista[k]);
-        }*/
-        Random slump = new Random();
-      //  Console.WriteLine("Ny lista med slumptal ");
-        int[] tallista2 = new int[antalnummer];//Skapat en tom array av heltal 
-        for (int i = 0; i < antalnummer; i++)
+        bubbelstoppur.Stop();// Stoppar tidtagaruret.
+        Random slump = new Random();// Skapar en ny random, denna heter slump istället för rnd.
+        int[] tallista2 = new int[antalnummer];// Skapat en tom array av heltal, testar att använda array för insertionsort istället för med list som jag gjorde när jag sorterade med bubblesort.
+        for (int i = 0; i < antalnummer; i++)// En for loop som gör att det läggs till tal tills talen är lika många som antalnummer.
         {
             tallista2[i] = slump.Next(10);
-           // Console.WriteLine(tallista2[i]);
         }
-        
-        int tmp, minst;
+        int tmp, minst;// Skapar den temporära variabeln minst.
         insertionstoppur.Start();
-        for (int y = 0; y < antalnummer; y++)// Här börjar den sortera med insertionsort
+        for (int y = 0; y < antalnummer; y++)
         {
             minst = y;
             for (int m = y + 1; m < antalnummer; m++)
@@ -66,20 +53,8 @@ class Program
             tallista2[minst] = tallista2[y];
             tallista2[y] = tmp;
         }
-        insertionstoppur.Stop();
-      /*  Console.WriteLine("Sorterad lista med selection sort ");
-        for (int y = 0; y < antalnummer; y++) 
-        {
-            Console.WriteLine(tallista2[y] + " ");
-        }*/
-        Console.WriteLine("Tid för bubbelsortering: {0} ", bubbelstoppur.Elapsed);
-        Console.WriteLine("Tid för insertionsortering: {0} ", insertionstoppur.Elapsed);
+        insertionstoppur.Stop();//Tidtagaruret stoppas.
+        Console.WriteLine("Tid för bubbelsortering: {0} ", bubbelstoppur.Elapsed);// Skriver ut hur lång tid det tog för talen att sorteras med bubblesort.
+        Console.WriteLine("Tid för insertionsortering: {0} ", insertionstoppur.Elapsed);// Skriver ut hur lång tid det tog för talen att sorteras med insertionsort.
     }
-
 }
-
-//Selectionsort ineffektiv för större mängder data http://cforbeginners.com/CSharp/SelectionSort.html
-//Testar att använda array istället för list
-/*Loop runt allt int [] försökserie = new int[3]{10, 1000, 100000};
- * for (int försöknr = 0 försöksnr 
-*/
